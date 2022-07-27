@@ -15,10 +15,6 @@ pub fn add_pwd(db: &Db, url: String, user: String, password: String, notes: Stri
     db.insert(key_bytes, info_vec)
 }
 
-pub fn search_suggester(search_str: &str) -> Vec<String> {
-    vec!["hello".to_string(), "world".to_string()]
-}
-
 pub fn get_all_to_map(db: &Db) -> Result<DashMap<PwdKey, PwdInfo>> {
     let pwd_map = DashMap::new();
     for item in db.iter() {
@@ -28,7 +24,9 @@ pub fn get_all_to_map(db: &Db) -> Result<DashMap<PwdKey, PwdInfo>> {
                 let key = PwdKey::try_from(key_b)?;
                 let value_b = BytesMut::from(value.to_vec().as_slice());
                 let value = PwdInfo::try_from(value_b)?;
-                pwd_map.insert(key, value);
+                if key.url != "primary_key" && key.user != "root" {
+                    pwd_map.insert(key, value);
+                }
             }
             Err(e) => {
                 println!("sorry! An error occur: {}", e);
