@@ -33,8 +33,7 @@ pub enum Commands {
 mod tests {
     use bytes::{Bytes, BytesMut};
     use prost::Message;
-
-    use crate::PwdKey;
+    use crate::pb::PwdKey;
 
     #[test]
     fn test() {

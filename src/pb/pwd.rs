@@ -1,3 +1,4 @@
+#[derive(Eq, Hash)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PwdKey {
     #[prost(string, tag="1")]
@@ -5,6 +6,7 @@ pub struct PwdKey {
     #[prost(string, tag="2")]
     pub user: ::prost::alloc::string::String,
 }
+#[derive(Eq, Hash)]
 #[derive(Clone, PartialEq, ::prost::Message)]
 pub struct PwdInfo {
     #[prost(string, tag="1")]

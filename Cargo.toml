@@ -16,6 +16,7 @@ zerocopy = "0.6"
 byteorder = "1.4"
 prost = "0.10"
 bytes = "1"
+dashmap = "5"
 
 [build-dependencies]
 prost-build = "0.10"
