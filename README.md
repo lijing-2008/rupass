@@ -1,2 +1,2 @@
 ## rupass
-This is a commandline and geek style password manager written in Rust.
+This is a command line and geek style password manager written in Rust.

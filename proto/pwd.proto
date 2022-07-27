@@ -1,0 +1,13 @@
+syntax = "proto3";
+
+package pwd;
+
+message PwdKey {
+    string url = 1;
+    string user = 2;
+}
+
+message PwdInfo {
+    string password = 1;
+    string notes = 2;
+}
