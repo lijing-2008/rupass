@@ -1,16 +1,10 @@
 use std::io;
 use std::io::Write;
-use std::path::PathBuf;
 
 use anyhow::Result;
-use bytes::{Bytes, BytesMut};
 use clap::Parser;
-use dashmap::DashMap;
-use inquire::Text;
-use sled::{Db, Mode};
-
-use crate::pb::*;
-
+use inquire::{Confirm, Password, PasswordDisplayMode, Text};
+use sled::{ Mode};
 use super::*;
 
 pub fn process_cmd() -> Result<()> {
@@ -18,8 +12,6 @@ pub fn process_cmd() -> Result<()> {
     // get the dir where password stored
     let mut source_path = dirs::home_dir().expect("home_dir wrong!");
     source_path.push(".rupass");
-    // entry password
-    let mut entry_password = String::new();
 
     // print msg BufWriter缓冲
     let stdout = io::stdout();
@@ -46,21 +38,33 @@ pub fn process_cmd() -> Result<()> {
         }
         Some(Commands::Add) => {
             let db = sled::open(source_path.as_path())?;
-            let url = Text::new("🐳 please input the website address:")
-                .with_help_message("http://docs.rs")
+            let url = Text::new("🐳 please input the website/app keyword:")
+                .with_help_message("e.g. http://docs.rs   qq")
                 .prompt()?;
             let user = Text::new("🥷🏻 please input your username:")
-                .with_help_message("admin")
+                .with_help_message("e.g. admin")
                 .prompt()?;
-            let password = Text::new("🧌 please input your password:")
-                .with_help_message("123Dd@126.com")
+            let password = Password::new("🌴 please input your password")
+                .with_display_mode(PasswordDisplayMode::Masked)
+                .with_display_toggle_enabled()
+                .with_help_message("you can change the password display by press Ctrl+R.")
                 .prompt()?;
             let notes = Text::new("🦀 please input some website notes/hints:")
                 .with_help_message("this is a private website")
                 .prompt()?;
-
-            add_pwd(&db, url, user, password, notes)?;
-            eprintln!("save done!")
+            let ans = Confirm::new("Are you sure to store this password?")
+                .with_default(true)
+                .with_help_message("press Enter/y/yes to store, press n/no to cancel.")
+                .prompt()?;
+            match ans {
+                true => {
+                    add_pwd(&db, url, user, password, notes)?;
+                    eprintln!("save done!")
+                }
+                false => {
+                    eprintln!("cancel!")
+                }
+            }
         }
         Some(Commands::Search) => {
             let search_str = Text::new("🦀 please input search keyword:")
