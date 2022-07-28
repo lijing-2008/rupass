@@ -23,6 +23,7 @@ pub fn delete_account(db: &Db, url: &str, user: &str) -> SledResult<Option<IVec>
     db.remove(key_bytes)
 }
 
+// 将数据库中的账户信息全部取出来放到DashMap中
 pub fn get_all_to_map(db: &Db) -> Result<DashMap<PwdKey, PwdInfo>> {
     let pwd_map = DashMap::new();
     for item in db.iter() {
