@@ -94,7 +94,36 @@ pub fn process_cmd() -> Result<()> {
             writeln!(print_handle, "===================total: {} records=====================", index)?;
             print_handle.flush()?;
         }
-        Some(Commands::Delete) => {}
+        Some(Commands::Delete) => {
+            let delete_keyword = Text::new("🦀 please input/select the entire account info:")
+                .with_help_message("suggesting you select from the account list.")
+                .with_suggester(&account_suggester)
+                .prompt()?;
+
+            // open database
+            let db = sled::open(source_path.as_path())?;
+            // get all website keywords
+            let pwd_map = get_all_to_map(&db)?;
+
+            if let Some(pwd_key) = get_entire_account(&delete_keyword, pwd_map) {
+                eprintln!("Delete account info: {}<{}>", pwd_key.url, pwd_key.user);
+                let ans = Confirm::new("Are you sure to delete?")
+                    .with_default(true)
+                    .with_help_message("press Enter/y/yes delete, press n/no to cancel.")
+                    .prompt()?;
+                match ans {
+                    true => {
+                        delete_account(&db, &pwd_key.url, &pwd_key.user)?;
+                        eprintln!("delete success!")
+                    }
+                    false => {
+                        eprintln!("delete failed!")
+                    }
+                }
+            } else {
+                eprintln!("Bad input! You need to input/select the entire account info!");
+            }
+        }
         Some(Commands::Update) => {}
         None => {}
     }
