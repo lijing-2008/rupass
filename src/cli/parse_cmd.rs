@@ -84,7 +84,7 @@ pub fn process_cmd() -> Result<()> {
                 if key.url.contains(search_str.as_str()) {
                     index += 1;
                     writeln!(print_handle, "===================Result NO.{}=====================", index)?;
-                    writeln!(print_handle, "website: {}\n user:{}\n password:{}\n notes:{}",
+                    writeln!(print_handle, " website/app: {}\n user: {}\n password: {}\n notes: {}",
                              key.url, key.user, value.password, value.notes)?;
                 } else {
                     continue;
