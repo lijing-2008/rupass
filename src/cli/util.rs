@@ -59,6 +59,8 @@ pub fn get_existing_key() -> Result<Vec<String>> {
     for (key, _) in dp {
         res.push(key.url)
     }
+    res.sort();
+    res.dedup();
     Ok(res)
 }
 

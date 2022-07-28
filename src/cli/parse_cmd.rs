@@ -4,7 +4,8 @@ use std::io::Write;
 use anyhow::Result;
 use clap::Parser;
 use inquire::{Confirm, Password, PasswordDisplayMode, Text};
-use sled::{ Mode};
+use sled::Mode;
+
 use super::*;
 
 pub fn process_cmd() -> Result<()> {
@@ -68,7 +69,7 @@ pub fn process_cmd() -> Result<()> {
         }
         Some(Commands::Search) => {
             let search_str = Text::new("🦀 please input search keyword:")
-                .with_help_message("qq")
+                .with_help_message("select from the account list.")
                 .with_suggester(&key_suggester)
                 .prompt()?;
 
