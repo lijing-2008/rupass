@@ -143,7 +143,7 @@ pub fn print_banner() -> Result<()> {
     let mut buf = String::new();
     loop {
         match buf_reader.read_line(&mut buf) {
-            Err(e) => panic!("read banner file error"),
+            Err(_) => panic!("read banner file error"),
             Ok(0) => break,
             Ok(_n) => {
                 writeln!(print_handle, "{}", buf)?;
