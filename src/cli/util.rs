@@ -1,3 +1,7 @@
+use std::fs::File;
+use std::io;
+use std::io::{BufRead, Write};
+
 use anyhow::Result;
 use bytes::{Bytes, BytesMut};
 use dashmap::DashMap;
@@ -129,11 +133,33 @@ pub fn get_entire_account(key: &str, map: DashMap<PwdKey, PwdInfo>) -> Option<Pw
     None
 }
 
+pub fn print_banner() -> Result<()> {
+    // print msg BufWriter缓冲
+    let stdout = io::stdout();
+    let mut print_handle = io::BufWriter::new(stdout);
+    // open banner file
+    let file = File::open("banner.txt")?;
+    let mut buf_reader = io::BufReader::new(file);
+    let mut buf = String::new();
+    loop {
+        match buf_reader.read_line(&mut buf) {
+            Err(e) => panic!("read banner file error"),
+            Ok(0) => break,
+            Ok(_n) => {
+                writeln!(print_handle, "{}", buf)?;
+                buf.clear();
+            }
+        }
+    }
+    print_handle.flush()?;
+    Ok(())
+}
+
 #[cfg(test)]
 mod tests {
     use sled::Db;
 
-    use crate::cli::{get_all_to_map, get_existing_key, key_suggester};
+    use crate::cli::{get_all_to_map, get_existing_key, key_suggester, print_banner};
 
     #[test]
     fn test() {
@@ -153,5 +179,10 @@ mod tests {
         println!("{:?}", a);
         let b = key_suggester("q");
         println!("{:?}", b);
+    }
+
+    #[test]
+    fn test_banner() {
+        print_banner().unwrap();
     }
 }

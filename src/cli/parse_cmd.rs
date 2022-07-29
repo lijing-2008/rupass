@@ -9,6 +9,7 @@ use sled::Mode;
 use super::*;
 
 pub fn process_cmd() -> Result<()> {
+    print_banner()?;
 
     // get the dir where password stored
     let mut source_path = dirs::home_dir().expect("home_dir wrong!");
@@ -124,7 +125,9 @@ pub fn process_cmd() -> Result<()> {
                 eprintln!("Bad input! You need to input/select the entire account info!");
             }
         }
-        Some(Commands::Update) => {}
+        Some(Commands::Update) => {
+            println!("sorry! this ia a todo()! part.")
+        }
         None => {}
     }
 
