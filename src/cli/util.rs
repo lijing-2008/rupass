@@ -1,7 +1,3 @@
-use std::fs::File;
-use std::io;
-use std::io::{BufRead, Write};
-
 use anyhow::Result;
 use bytes::{Bytes, BytesMut};
 use dashmap::DashMap;
@@ -9,6 +5,14 @@ use sled::{Db, IVec};
 use sled::Result as SledResult;
 
 use crate::pb::{PwdInfo, PwdKey};
+
+const BANNER: &str = "                 __
+ _      __ ___   / /_____ ____   ____ ___   ___     _____ __  __ ____   ____ _ _____ _____
+| | /| / // _ \\ / // ___// __ \\ / __ `__ \\ / _ \\   / ___// / / // __ \\ / __ `// ___// ___/
+| |/ |/ //  __// // /__ / /_/ // / / / / //  __/  / /   / /_/ // /_/ // /_/ /(__  )(__  )
+|__/|__/ \\___//_/ \\___/ \\____//_/ /_/ /_/ \\___/  /_/    \\__,_// .___/ \\__,_//____//____/
+                                                             /_/
+";
 
 // 新增密码账户
 pub fn add_pwd(db: &Db, url: String, user: String, password: String, notes: String) -> SledResult<Option<IVec>> {
@@ -133,26 +137,8 @@ pub fn get_entire_account(key: &str, map: DashMap<PwdKey, PwdInfo>) -> Option<Pw
     None
 }
 
-pub fn print_banner() -> Result<()> {
-    // print msg BufWriter缓冲
-    let stdout = io::stdout();
-    let mut print_handle = io::BufWriter::new(stdout);
-    // open banner file
-    let file = File::open("banner.txt")?;
-    let mut buf_reader = io::BufReader::new(file);
-    let mut buf = String::new();
-    loop {
-        match buf_reader.read_line(&mut buf) {
-            Err(_) => panic!("read banner file error"),
-            Ok(0) => break,
-            Ok(_n) => {
-                writeln!(print_handle, "{}", buf)?;
-                buf.clear();
-            }
-        }
-    }
-    print_handle.flush()?;
-    Ok(())
+pub fn print_banner() {
+    eprintln!("{}", BANNER);
 }
 
 #[cfg(test)]

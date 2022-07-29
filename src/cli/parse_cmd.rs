@@ -9,7 +9,7 @@ use sled::Mode;
 use super::*;
 
 pub fn process_cmd() -> Result<()> {
-    print_banner()?;
+    print_banner();
 
     // get the dir where password stored
     let mut source_path = dirs::home_dir().expect("home_dir wrong!");

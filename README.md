@@ -43,6 +43,3 @@ target/debug/rupass delete
 You need input the entire account info, such as `baidu.com<admin>`.
 in fact, you don't need to input the entire info, just select from the suggester which you need to delete.
 ![](https://github.com/lijing-2008/PicGo/blob/master/delete.gif)
-
-## Custom welcome banner
-You can change welcome banner yourself, edit `banner.txt` in root directory.

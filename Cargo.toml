@@ -8,7 +8,7 @@ license = "MIT/Apache-2.0"
 homepage = "https://github.com/lijing-2008/rupass"
 repository = "https://github.com/lijing-2008/rupass"
 keywords = ["sled", "inquire"]
-exclude = ["examples"]
+include = ["banner.txt"]
 readme = "README.md"
 documentation = "https://docs.rs/rupass/"
 
