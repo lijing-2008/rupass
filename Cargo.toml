@@ -7,7 +7,7 @@ description = "This is a command line and geek style password manager written in
 license = "MIT/Apache-2.0"
 homepage = "https://github.com/lijing-2008/rupass"
 repository = "https://github.com/lijing-2008/rupass"
-keywords = ["cli", "command line", "password manager"]
+keywords = ["cli", "commandline", "password_manager"]
 readme = "README.md"
 documentation = "https://docs.rs/rupass/"
 
