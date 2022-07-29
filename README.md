@@ -19,6 +19,7 @@ target/debug/rupass init
 ```
 You need an entry password you must remember, but now, it's no use, maybe in use few days later.
 ![](https://github.com/lijing-2008/PicGo/blob/master/init.gif)
+
 ### add password
 ```bash
 target/debug/rupass add

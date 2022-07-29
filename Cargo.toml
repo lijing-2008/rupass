@@ -3,6 +3,14 @@ authors = ["li_jing"]
 name = "rupass"
 version = "0.1.0"
 edition = "2021"
+description = "This is a command line and geek style password manager written in Rust."
+license = "MIT/Apache-2.0"
+homepage = "https://github.com/lijing-2008/rupass"
+repository = "https://github.com/lijing-2008/rupass"
+keywords = ["sled", "inquire"]
+exclude = ["examples"]
+readme = "README.md"
+documentation = "https://docs.rs/rupass/"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -20,3 +28,5 @@ dashmap = "5"
 
 [build-dependencies]
 prost-build = "0.10"
+
+
