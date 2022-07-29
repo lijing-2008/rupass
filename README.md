@@ -1,10 +1,8 @@
 <div align="center">
-  <p style="font-size:40px">rupass</p>
   rupass is a command line and geek style password manager written in Rust.
   <br/>
   <a href="https://crates.io/crates/rupass"><img alt="crates.io" src="https://img.shields.io/badge/crates.io-v0.1.2-brightgreen" /></a>
   <a href="https://blog.rust-lang.org/2022/07/19/Rust-1.62.1.html"><img alt="Rust Version" src="https://img.shields.io/badge/rust-1.62%2B-blue" /></a>  
-  <HR align=center width=500 color=“green” SIZE=1>
   </div>
 
 ## 🍻 Features
@@ -12,7 +10,7 @@
 - Built with [Sled](https://github.com/spacejam/sled) 、 [inquire](https://github.com/mikaelmello/inquire) and [clap](https://github.com/clap-rs/clap)
 - Offer add、delete、search functions now
 
-## s🧸 Installation
+## 🧸 Installation
 
 To install rupass, use package manager:
 
