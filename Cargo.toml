@@ -1,14 +1,13 @@
 [package]
 authors = ["li_jing"]
 name = "rupass"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 description = "This is a command line and geek style password manager written in Rust."
 license = "MIT/Apache-2.0"
 homepage = "https://github.com/lijing-2008/rupass"
 repository = "https://github.com/lijing-2008/rupass"
-keywords = ["sled", "inquire"]
-include = ["banner.txt"]
+keywords = ["cli", "command line", "password manager"]
 readme = "README.md"
 documentation = "https://docs.rs/rupass/"
 
