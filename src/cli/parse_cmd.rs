@@ -41,7 +41,7 @@ pub fn process_cmd() -> Result<()> {
         Some(Commands::Add) => {
             let db = sled::open(source_path.as_path())?;
             let url = Text::new("🐳 please input the website/app keyword:")
-                .with_help_message("e.g. http://docs.rs   qq")
+                .with_help_message("e.g. http://docs.rs or qq")
                 .prompt()?;
             let user = Text::new("🥷🏻 please input your username:")
                 .with_help_message("e.g. admin")
@@ -51,7 +51,7 @@ pub fn process_cmd() -> Result<()> {
                 .with_display_toggle_enabled()
                 .with_help_message("you can change the password display by press Ctrl+R.")
                 .prompt()?;
-            let notes = Text::new("🦀 please input some website notes/hints:")
+            let notes = Text::new("🦀 please input some website/app notes/hints:")
                 .with_help_message("this is a private website")
                 .prompt()?;
             let ans = Confirm::new("Are you sure to store this password?")
@@ -126,9 +126,11 @@ pub fn process_cmd() -> Result<()> {
             }
         }
         Some(Commands::Update) => {
-            println!("sorry! this ia a todo()! part.")
+            eprintln!("sorry! this ia a todo()! part.")
         }
-        None => {}
+        None => {
+            eprintln!("sorry! this is a todo()! part")
+        }
     }
 
     Ok(())
